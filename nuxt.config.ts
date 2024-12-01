@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "radix-vue/nuxt",
     "@nuxt/icon",
+    "@nuxt/fonts",
   ],
   eslint: {
     config: {

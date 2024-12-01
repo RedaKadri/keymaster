@@ -1,12 +1,15 @@
 <template>
   <header
-    class="sticky top-0 z-50 flex items-center justify-between bg-background/95 py-3 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-    <NuxtLink to="/" class="cursor-pointer">
-      <UiButton
-        class="font-mono text-2xl font-bold bg-background text-foreground hover:bg-secondary hover:text-secondary-foreground">
-        Mantype
-      </UiButton>
-    </NuxtLink>
+    class="sticky top-0 z-50 flex items-center justify-between bg-background/95 py-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div>
+      <NuxtLink to="/" class="cursor-pointer">
+        <UiButton
+          class="gap-2 px-0 font-mono text-3xl font-bold bg-background text-foreground hover:bg-transparent hover:text-secondary-foreground">
+          <Icon name="radix-icons:keyboard" class="h-[2.4rem] w-[2.4rem]" />
+          mantype
+        </UiButton>
+      </NuxtLink>
+    </div>
     <div className="flex justify-center gap-4">
       <UiThemeToggle />
     </div>
