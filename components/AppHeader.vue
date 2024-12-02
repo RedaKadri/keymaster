@@ -1,10 +1,12 @@
 <template>
   <header
-    class="sticky top-0 z-50 flex items-center justify-between bg-background/95 py-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    class="sticky top-0 z-50 flex items-center justify-between bg-background/95 py-6 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+  >
     <div>
       <NuxtLink to="/" class="cursor-pointer">
         <UiButton
-          class="gap-2 px-0 font-mono text-3xl font-bold bg-background text-foreground hover:bg-transparent hover:text-secondary-foreground">
+          class="gap-2 px-0 font-mono text-3xl font-bold bg-background text-foreground hover:bg-transparent hover:text-secondary-foreground"
+        >
           <Icon name="radix-icons:keyboard" class="h-[2.4rem] w-[2.4rem]" />
           mantype
         </UiButton>
@@ -15,3 +17,4 @@
     </div>
   </header>
 </template>
+
