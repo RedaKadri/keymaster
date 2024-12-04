@@ -1,88 +1,40 @@
 <script setup lang="ts">
-const text = "The sun dipped below the horizon, painting the sky in hues of orange and pink. A gentle breeze whispered through the trees, carrying the sweet scent of flowers.";
+import type { wpmType } from '~/types';
 
-const inputRef = useTemplateRef("input");
-const userText = ref("");
+const text = "The sun dipped below the horizon, painting the sky in hues of orange and pink. A gentle breeze whispered through the trees, carrying the sweet scent of flowers."
 
-const wpm = reactive<{
-  raw: number[];
-  net: number[];
-  error: number[];
-  lastUserPosition: number;
-}>({
-  raw: [],
-  net: [],
-  error: [],
-  lastUserPosition: 0,
-});
-const timer = reactive<{ status: "idle" | "start" | "end"; counter: number }>({
-  status: "idle",
-  counter: 15,
-});
-let timerInterval: ReturnType<typeof setInterval>;
+const { timer, startTimer, stopTimer } = useTimer()
 
-watch(
-  () => timer.status,
-  (timerStatus) => {
-    if (timerStatus === "start") {
-      timerInterval = setInterval(() => {
-        timer.counter--;
-      }, 1000);
-    } else {
-      clearInterval(timerInterval);
-    }
-  },
-);
-watch(
-  () => timer.counter,
-  (timerCounter) => {
-    console.time("timer");
+const userInput = ref("")
+const inputRef = useTemplateRef("input")
 
-    const raw = Math.floor(
-      userText.value.length / 5 / ((15 - timer.counter) / 60),
-    );
-    wpm.raw.push(raw);
+const wpm = ref<wpmType[]>([])
 
-    let errorCount = 0;
-    for (let i = wpm.lastUserPosition; i < userText.value.length; i++) {
-      if (text[i] !== userText.value[i]) {
-        errorCount++;
-      }
-    }
-    wpm.lastUserPosition = userText.value.length;
-    wpm.error.push(errorCount);
-    const allError = wpm.error.reduce((x, e) => (x += e));
-    console.log(allError);
+let prevUserInputIndex = 0
+watch(() => timer.counter, (timerCounter) => {
+  const userInputLength = userInput.value.length
 
-    const net = Math.floor(
-      (userText.value.length / 5 - allError) / ((15 - timer.counter) / 60),
-    );
-    wpm.net.push(net);
+  const wpmErrors = getWpmErrors(prevUserInputIndex, userInput.value, text)
+  prevUserInputIndex = userInputLength
 
-    if (timerCounter === 0) timer.status = "end";
+  const wpmRaw = Math.floor(userInputLength / 5 / ((15 - timer.counter) / 60));
 
-    console.timeEnd("timer");
-  },
-);
+  const allWpmErrors = getAllWpmErrors(wpm.value)
+  const wpmNet = Math.floor((userInputLength / 5 - allWpmErrors) / ((15 - timer.counter) / 60));
+
+  wpm.value.push({ time: timerCounter, raw: wpmRaw, net: wpmNet, errors: wpmErrors })
+
+  if (timerCounter === 0) stopTimer()
+})
+
 </script>
 
 <template>
   <section class="w-full cursor-default" @click="inputRef?.focus()">
-    <div v-if="timer.status !== 'end'">
-      <p
-        class="my-3 text-3xl"
-        :class="timer.status === 'start' ? 'opacity-100' : 'opacity-0'"
-      >
-        {{ timer.counter }}
-      </p>
-      <input
-        ref="input"
-        v-model="userText"
-        class="absolute z-50 opacity-0"
-        @keypress.once="timer.status = 'start'"
-      >
-      <MainText :user-text="userText" :text="text" />
-    </div>
-    <MainResult v-else :wpm="wpm" />
+    <input ref="input" v-model="userInput" class="absolute z-50 opacity-0" @keypress.once="startTimer()">
+    <MainTimer :timer="timer.counter" :class="timer.status === 'active' ? 'opacity-100' : 'opacity-0'" />
+    <MainText :user-text="userInput" :text="text" />
+    <MainResult v-if="timer.status === 'done'" :wpm="wpm" />
   </section>
+
 </template>

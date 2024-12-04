@@ -6,7 +6,7 @@ const { userText, text } = defineProps<{ userText: string; text: string }>();
   <p class="text-4xl">
     <span
       v-for="(character, index) in text"
-      :key="character"
+      :key="index"
       :class="
         userText.length > index
           ? userText[index] === character
