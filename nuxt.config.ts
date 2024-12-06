@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "radix-vue/nuxt",
     "@nuxt/icon",
     "@nuxt/fonts",
+    "@pinia/nuxt",
   ],
   eslint: {
     config: {

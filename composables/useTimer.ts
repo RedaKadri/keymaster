@@ -1,28 +1,26 @@
-export default function (valueInSeconds = 15) {
-  const timer = reactive<{
-    counter: number;
-    status: "idle" | "active" | "done";
-  }>({ counter: valueInSeconds, status: "idle" });
+export default function () {
+  const { getItem, setItem } = useLocalStorage<number>("time");
+
+  const timer = useState("timer", () => getItem() || 15);
+
+  const setTimer = (value: number) => {
+    setItem(value);
+    timer.value = value;
+  };
 
   let timerInterval: ReturnType<typeof setInterval>;
-
   const startTimer = () => {
-    timer.status = "active";
     timerInterval = setInterval(() => {
-      timer.counter--;
+      timer.value--;
     }, 1000);
   };
-
   const stopTimer = () => {
-    timer.status = "done";
     clearInterval(timerInterval);
   };
-
   const resetTimer = () => {
     clearInterval(timerInterval);
-    timer.counter = valueInSeconds;
-    timer.status = "idle";
+    timer.value = getItem() || 15;
   };
 
-  return { timer, startTimer, stopTimer, resetTimer };
+  return { timer, setTimer, startTimer, stopTimer, resetTimer };
 }

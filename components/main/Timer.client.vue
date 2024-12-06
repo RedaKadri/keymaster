@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { timer } = defineProps<{ timer: number }>()
-
+const { timer, setTimer } = useTimer()
 const timeOptions = [15, 30, 60, 120]
 </script>
 
@@ -20,6 +19,7 @@ const timeOptions = [15, 30, 60, 120]
         v-for="timeOption in timeOptions"
         :key="timeOption"
         class="mx-1 transition-colors hover:text-primary-foreground"
+        @click="setTimer(timeOption)"
       >
         {{ timeOption }}
       </button>

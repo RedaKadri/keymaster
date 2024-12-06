@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { wpmType } from "~/types";
 
-const text = "The sun dipped below the horizon, painting the sky in hues of orange and pink. A gentle breeze whispered through the trees, carrying the sweet scent of flowers.";
+const text =
+  "The sun dipped below the horizon, painting the sky in hues of orange and pink. A gentle breeze whispered through the trees, carrying the sweet scent of flowers.";
 
-const { timer, startTimer, stopTimer } = useTimer();
+const { timer, stopTimer, startTimer } = useTimer()
 
 const userInput = ref("");
 const inputRef = useTemplateRef("input");
@@ -12,21 +13,31 @@ const wpm = ref<wpmType[]>([]);
 
 let prevUserInputIndex = 0;
 watch(
-  () => timer.counter,
-  (timerCounter) => {
+  timer,
+  () => {
     const userInputLength = userInput.value.length;
 
-    const wpmRaw = Math.floor(userInputLength / 5 / ((15 - timer.counter) / 60));
+    const wpmRaw = Math.floor(
+      userInputLength / 5 / ((15 - timer.value) / 60),
+    );
 
     const allWpmErrors = getAllWpmErrors(wpm.value);
-    const wpmNet = Math.floor((userInputLength / 5 - allWpmErrors) / ((15 - timer.counter) / 60));
+    const wpmNet = Math.floor(
+      (userInputLength / 5 - allWpmErrors) /
+      ((15 - timer.value) / 60),
+    );
 
     const wpmErrors = getWpmErrors(prevUserInputIndex, userInput.value, text);
     prevUserInputIndex = userInputLength;
 
-    wpm.value.push({ time: timerCounter, raw: wpmRaw, net: wpmNet, errors: wpmErrors, });
+    wpm.value.push({
+      time: timer.value,
+      raw: wpmRaw,
+      net: wpmNet,
+      errors: wpmErrors,
+    });
 
-    if (timerCounter === 0) stopTimer();
+    if (timer.value === 0) stopTimer();
   },
 );
 </script>
@@ -34,8 +45,8 @@ watch(
 <template>
   <section class="w-full cursor-default" @click="inputRef?.focus()">
     <input ref="input" v-model="userInput" class="absolute z-50 opacity-0" @keypress.once="startTimer()">
-    <MainTimer :timer="timer.counter" />
+    <MainTimer />
     <MainText :user-text="userInput" :text="text" />
-    <MainResult v-if="timer.status === 'done'" :wpm="wpm" />
+    <MainResult v-if="timer === 0" :wpm="wpm" />
   </section>
 </template>
