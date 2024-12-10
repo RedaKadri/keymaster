@@ -4,4 +4,3 @@ export type wpmType = {
   net: number;
   errors: number;
 };
-

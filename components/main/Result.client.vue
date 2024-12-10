@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { wpmType } from '~/types';
+import type { wpmType } from "~/types";
 
 const { wpm } = defineProps<{
   wpm: wpmType[];
 }>();
 
-const result = computed(() => ({ raw: wpm.at(-1)?.raw, net: wpm.at(-1)?.net }))
+const result = computed(() => ({ raw: wpm.at(-1)?.raw, net: wpm.at(-1)?.net }));
 </script>
 
 <template>

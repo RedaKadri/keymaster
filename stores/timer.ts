@@ -1,17 +1,21 @@
-export default function () {
+export const useTimerStore = defineStore("timer", () => {
   const { getItem, setItem } = useLocalStorage<number>("time");
 
-  const timer = useState("timer", () => getItem() || 15);
+  const timer = reactive<{ init: number; counter: number }>({
+    init: getItem() || 15,
+    counter: getItem() || 15,
+  });
 
   const setTimer = (value: number) => {
     setItem(value);
-    timer.value = value;
+    timer.counter = value;
+    timer.init = value;
   };
 
   let timerInterval: ReturnType<typeof setInterval>;
   const startTimer = () => {
     timerInterval = setInterval(() => {
-      timer.value--;
+      timer.counter--;
     }, 1000);
   };
   const stopTimer = () => {
@@ -19,8 +23,8 @@ export default function () {
   };
   const resetTimer = () => {
     clearInterval(timerInterval);
-    timer.value = getItem() || 15;
+    timer.counter = getItem() || 15;
   };
 
   return { timer, setTimer, startTimer, stopTimer, resetTimer };
-}
+});
