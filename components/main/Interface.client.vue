@@ -2,7 +2,7 @@
 import type { wpmType } from "~/types";
 
 const text =
-  "The sun dipped below the horizon, painting the sky in hues of orange and pink. A gentle breeze whispered through the trees, carrying the sweet scent of flowers.";
+  "Nature is the world around us. It includes everything that is not made by people, like trees, animals, rivers, and mountains. Nature is important because it gives us air to breathe, water to drink, and food to eat. It also provides us with beautiful places to visit and enjoy. We need to take care of nature because it is important for our health and well-being. ";
 
 const timerStore = useTimerStore();
 
@@ -22,16 +22,15 @@ let prevUserInputIndex = 0;
 watch(
   () => timerStore.timer.counter,
   (timerCounter) => {
+    if (timerCounter === timerStore.timer.init) return;
+
     const userInputLength = userInput.value.length;
 
-    const wpmRaw = Math.floor(
-      userInputLength / 5 / ((timerStore.timer.init - timerCounter) / 60),
-    );
-
-    const allWpmErrors = getAllWpmErrors(wpm.value);
-    const wpmNet = Math.floor(
-      (userInputLength / 5 - allWpmErrors) /
-        ((timerStore.timer.init - timerCounter) / 60),
+    const { wpmRaw, wpmNet } = wpmUtils(
+      wpm.value,
+      userInputLength,
+      timerStore.timer.init,
+      timerCounter,
     );
 
     const wpmErrors = getWpmErrors(prevUserInputIndex, userInput.value, text);
@@ -50,7 +49,8 @@ watch(
 </script>
 
 <template>
-  <section class="w-full cursor-default" @click="inputRef?.focus()">
+  <MainResult v-if="timerStore.timer.counter === 0" :wpm="wpm" />
+  <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
     <input
       ref="input"
       v-model="userInput"
@@ -60,8 +60,9 @@ watch(
     <MainTimer />
     <MainText :user-text="userInput" :text="text" />
     <div class="flex justify-center m-10">
-      <UiButton
-        class="hover:bg-accent hover:text-accent-foreground"
+      <Icon
+        name="radix-icons:symbol"
+        class="absolute text-xl transition-all opacity-50 cursor-pointer hover:opacity-100 hover:rotate-90"
         @click="
           () => {
             userInput = '';
@@ -70,10 +71,7 @@ watch(
             wpm = [];
           }
         "
-      >
-        restart
-      </UiButton>
+      />
     </div>
-    <MainResult v-if="timerStore.timer.counter === 0" :wpm="wpm" />
   </section>
 </template>

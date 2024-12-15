@@ -5,6 +5,8 @@ const { wpm } = defineProps<{
   wpm: wpmType[];
 }>();
 
+console.log(wpm);
+
 const result = computed(() => ({ raw: wpm.at(-1)?.raw, net: wpm.at(-1)?.net }));
 </script>
 

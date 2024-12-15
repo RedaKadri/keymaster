@@ -20,7 +20,7 @@ const timeOptions = [15, 30, 60, 120];
       <button
         v-for="timeOption in timeOptions"
         :key="timeOption"
-        class="mx-1 transition-colors hover:text-primary-foreground"
+        class="mx-1 transition-colors hover:text-primary-foreground overflow-clip"
         @click="timerStore.setTimer(timeOption)"
       >
         {{ timeOption }}
@@ -28,4 +28,3 @@ const timeOptions = [15, 30, 60, 120];
     </div>
   </div>
 </template>
-
