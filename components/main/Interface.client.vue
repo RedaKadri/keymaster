@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { wpmType } from "~/types";
 
-const text =
-  "Nature is the world around us. It includes everything that is not made by people, like trees, animals, rivers, and mountains. Nature is important because it gives us air to breathe, water to drink, and food to eat. It also provides us with beautiful places to visit and enjoy. We need to take care of nature because it is important for our health and well-being. ";
+const text = ref(generateText(700));
 
 const timerStore = useTimerStore();
 
@@ -10,9 +9,7 @@ const userInput = ref("");
 const inputRef = useTemplateRef("input");
 let userStartTyping = false;
 const handleInputKeypress = () => {
-  if (!userStartTyping) {
-    timerStore.startTimer();
-  }
+  if (!userStartTyping) timerStore.startTimer();
   userStartTyping = true;
 };
 
@@ -26,22 +23,12 @@ watch(
 
     const userInputLength = userInput.value.length;
 
-    const { wpmRaw, wpmNet } = wpmUtils(
-      wpm.value,
-      userInputLength,
-      timerStore.timer.init,
-      timerCounter,
-    );
+    const { wpmRaw, wpmNet } = wpmUtils( wpm.value, userInputLength, timerStore.timer.init, timerCounter);
 
-    const wpmErrors = getWpmErrors(prevUserInputIndex, userInput.value, text);
+    const wpmErrors = getWpmErrors( prevUserInputIndex, userInput.value, text.value);
     prevUserInputIndex = userInputLength;
 
-    wpm.value.push({
-      time: timerCounter,
-      raw: wpmRaw,
-      net: wpmNet,
-      errors: wpmErrors,
-    });
+    wpm.value.push({ time: timerCounter, raw: wpmRaw, net: wpmNet, errors: wpmErrors });
 
     if (timerCounter === 0) timerStore.stopTimer();
   },
@@ -69,6 +56,7 @@ watch(
             timerStore.resetTimer();
             userStartTyping = false;
             wpm = [];
+            text = generateText(700);
           }
         "
       />
