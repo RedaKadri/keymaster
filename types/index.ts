@@ -1,5 +1,5 @@
 export type wpmType = {
-  time: number;
+  x: number;
   raw: number;
   net: number;
   errors: number;

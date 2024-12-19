@@ -23,12 +23,26 @@ watch(
 
     const userInputLength = userInput.value.length;
 
-    const { wpmRaw, wpmNet } = wpmUtils( wpm.value, userInputLength, timerStore.timer.init, timerCounter);
+    const { wpmRaw, wpmNet } = wpmUtils(
+      wpm.value,
+      userInputLength,
+      timerStore.timer.init,
+      timerCounter,
+    );
 
-    const wpmErrors = getWpmErrors( prevUserInputIndex, userInput.value, text.value);
+    const wpmErrors = getWpmErrors(
+      prevUserInputIndex,
+      userInput.value,
+      text.value,
+    );
     prevUserInputIndex = userInputLength;
 
-    wpm.value.push({ time: timerCounter, raw: wpmRaw, net: wpmNet, errors: wpmErrors });
+    wpm.value.push({
+      x: timerStore.timer.init - timerCounter,
+      raw: wpmRaw,
+      net: wpmNet,
+      errors: wpmErrors,
+    });
 
     if (timerCounter === 0) timerStore.stopTimer();
   },
