@@ -47,32 +47,36 @@ watch(
     if (timerCounter === 0) timerStore.stopTimer();
   },
 );
+
+const resetTest = () => {
+  userInput.value = "";
+  timerStore.resetTimer();
+  userStartTyping = false;
+  wpm.value = [];
+  text.value = generateText(700);
+};
 </script>
 
 <template>
-  <MainResult v-if="timerStore.timer.counter === 0" :wpm="wpm" />
+  <MainResult
+    v-if="timerStore.timer.counter === 0"
+    :wpm="wpm"
+    :reset-test="resetTest"
+  />
   <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
     <input
       ref="input"
       v-model="userInput"
       class="absolute z-50 opacity-0"
       @keypress="handleInputKeypress"
-    >
+    />
     <MainTimer />
     <MainText :user-text="userInput" :text="text" />
     <div class="flex justify-center m-10">
       <Icon
         name="radix-icons:symbol"
         class="absolute text-xl transition-all opacity-50 cursor-pointer hover:opacity-100 hover:rotate-90"
-        @click="
-          () => {
-            userInput = '';
-            timerStore.resetTimer();
-            userStartTyping = false;
-            wpm = [];
-            text = generateText(700);
-          }
-        "
+        @click="resetTest"
       />
     </div>
   </section>

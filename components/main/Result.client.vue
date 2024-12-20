@@ -1,55 +1,34 @@
 <script setup lang="ts">
-import Chart from "chart.js/auto";
 import type { wpmType } from "~/types";
 
-const { wpm } = defineProps<{
+const { wpm, resetTest } = defineProps<{
   wpm: wpmType[];
+  resetTest: () => void;
 }>();
-
-const canvasRef = useTemplateRef("canvas");
-
-onMounted(() => {
-  if (!canvasRef.value) return;
-  new Chart(canvasRef.value, {
-    type: "line",
-    data: {
-      labels: wpm.map((data) => data.x),
-      datasets: [
-        {
-          label: "raw",
-          data: wpm,
-          parsing: {
-            yAxisKey: "raw",
-          },
-          borderColor: "rgba(1, 1, 125, 1)",
-        },
-        {
-          label: "net",
-          data: wpm,
-          parsing: {
-            yAxisKey: "net",
-          },
-          borderColor: "rgba(1, 125, 1, 1)",
-        },
-        {
-          label: "errors",
-          data: wpm,
-          parsing: {
-            yAxisKey: "errors",
-          },
-          type: "scatter",
-          pointStyle: "crossRot",
-          borderColor: "rgba(125, 1, 1, 1)",
-        },
-      ],
-    },
-
-  });
-});
+const result = wpm.at(-1);
 </script>
 
 <template>
-  <section>
-    <canvas ref="canvas" height="300" width="1500" />
+  <section class="w-full h-60">
+    <MainResultChart :wpm="wpm" />
+    <div class="flex justify-between items-center my-6 mx-12 text-3xl">
+      <p>
+        wpm <span class="text-primary-foreground">{{ result?.net }}</span>
+      </p>
+      <p>
+        raw <span class="text-primary-foreground">{{ result?.raw }}</span>
+      </p>
+      <p>
+        time <span class="text-primary-foreground">{{ result?.x }}</span
+        >s
+      </p>
+      <div>
+        <Icon
+          name="radix-icons:double-arrow-right"
+          class="hover:text-primary-foreground transition-colors cursor-pointer"
+          @click="resetTest"
+        />
+      </div>
+    </div>
   </section>
 </template>
