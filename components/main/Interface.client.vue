@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { wpmType } from "~/types";
 
+const blurSection = ref(true);
+
 const text = ref(generateText(700));
 
 const timerStore = useTimerStore();
@@ -54,6 +56,7 @@ const resetTest = () => {
   userStartTyping = false;
   wpm.value = [];
   text.value = generateText(700);
+  blurSection.value = true;
 };
 </script>
 
@@ -63,7 +66,16 @@ const resetTest = () => {
     :wpm="wpm"
     :reset-test="resetTest"
   />
-  <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
+  <section
+    v-else
+    class="w-full cursor-default"
+    @click="
+      () => {
+        inputRef?.focus();
+        blurSection = false;
+      }
+    "
+  >
     <input
       ref="input"
       v-model="userInput"
@@ -71,7 +83,11 @@ const resetTest = () => {
       @keypress="handleInputKeypress"
     />
     <MainTimer />
-    <MainText :user-text="userInput" :text="text" />
+    <MainText
+      :user-text="userInput"
+      :text="text"
+      :class="blurSection && 'blur-md'"
+    />
     <div class="flex justify-center m-10">
       <Icon
         name="radix-icons:symbol"

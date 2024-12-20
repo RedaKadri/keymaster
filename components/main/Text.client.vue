@@ -13,23 +13,35 @@ watch(textRef, () => {
 watch(
   () => userText,
   (updatedUserText) => {
-    if ( updatedUserText.length > charsPer2Lines.value && updatedUserText.endsWith(" ")) {
-      currentScroll.value += 40;
-      charsPer2Lines.value += textRef.value ? Math.floor(textRef.value?.clientWidth / 22) : 67;
+    if (
+      updatedUserText.length > charsPer2Lines.value &&
+      updatedUserText.endsWith(" ")
+    ) {
+      currentScroll.value += 53;
+      charsPer2Lines.value += textRef.value
+        ? Math.floor(textRef.value?.clientWidth / 22)
+        : 67;
     }
   },
 );
 </script>
 
 <template>
-  <div class="text-4xl h-[122px] overflow-hidden">
-    <p ref="par" class="relative" :style="{ bottom: currentScroll + 'px' }">
+  <div class="text-4xl h-[165px] overflow-hidden">
+    <p
+      ref="par"
+      class="relative leading-normal"
+      :style="{ bottom: currentScroll + 'px' }"
+    >
       <span
         v-for="(character, index) in text"
         :key="index"
+        style=""
         :class="{
-          'opacity-100': index < userText.length && userText[index] === character,
-          'text-destructive': index < userText.length && userText[index] !== character,
+          'opacity-100':
+            index < userText.length && userText[index] === character,
+          'text-destructive':
+            index < userText.length && userText[index] !== character,
           'opacity-50': index >= userText.length,
         }"
       >
