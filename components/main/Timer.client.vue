@@ -22,7 +22,10 @@ const timeOptions = [15, 30, 60, 120];
           v-for="timeOption in timeOptions"
           :key="timeOption"
           class="mx-1 transition-colors hover:text-[#6a9589] overflow-clip"
-          :class="{ hidden: timeOption === timerStore.timer.init }"
+          :class="{
+            'cursor-not-allowed': timeOption === timerStore.timer.init,
+          }"
+          :disabled="timeOption === timerStore.timer.init"
           @click="timerStore.setTimer(timeOption)"
         >
           {{ timeOption }}
