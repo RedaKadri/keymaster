@@ -7,7 +7,7 @@ const timeOptions = [15, 30, 60, 120];
   <div
     class="flex items-center p-2 my-10 rounded-lg w-fit bg-accent text-accent-foreground"
   >
-    <div class="flex items-center gap-1 text-primary-foreground mr-1">
+    <div class="flex items-center gap-1 text-[#6a9589] mr-1">
       <Icon name="radix-icons:clock" />
       <span>{{ timerStore.timer.counter }}</span>
     </div>
@@ -21,7 +21,7 @@ const timeOptions = [15, 30, 60, 120];
         <button
           v-for="timeOption in timeOptions"
           :key="timeOption"
-          class="mx-1 transition-colors hover:text-primary-foreground overflow-clip"
+          class="mx-1 transition-colors hover:text-[#6a9589] overflow-clip"
           :class="{ hidden: timeOption === timerStore.timer.init }"
           @click="timerStore.setTimer(timeOption)"
         >

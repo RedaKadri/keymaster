@@ -66,16 +66,7 @@ const resetTest = () => {
     :wpm="wpm"
     :reset-test="resetTest"
   />
-  <section
-    v-else
-    class="w-full cursor-default"
-    @click="
-      () => {
-        inputRef?.focus();
-        blurSection = false;
-      }
-    "
-  >
+  <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
     <input
       ref="input"
       v-model="userInput"
@@ -83,11 +74,20 @@ const resetTest = () => {
       @keypress="handleInputKeypress"
     />
     <MainTimer />
-    <MainText
-      :user-text="userInput"
-      :text="text"
-      :class="blurSection && 'blur-md'"
-    />
+    <div class="flex justify-center items-center" @click="blurSection = false">
+      <div
+        v-if="blurSection"
+        class="absolute flex justify-center items-center gap-2"
+      >
+        <Icon name="radix-icons:cursor-arrow" />
+        <p>Click here to focus</p>
+      </div>
+      <MainText
+        :user-text="userInput"
+        :text="text"
+        :class="blurSection && 'blur-md'"
+      />
+    </div>
     <div class="flex justify-center m-10">
       <Icon
         name="radix-icons:symbol"

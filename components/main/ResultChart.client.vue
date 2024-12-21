@@ -38,8 +38,8 @@ onMounted(() => {
           parsing: {
             yAxisKey: "raw",
           },
-          borderColor: "#2a2a37",
-          pointBackgroundColor: "#2a2a37",
+          borderColor: "#727169",
+          pointBackgroundColor: "#727169",
           borderWidth: 3,
           pointRadius: 2,
           order: 3,
