@@ -9,9 +9,9 @@ const timeOptions = [15, 30, 60, 120];
   >
     <div class="flex items-center gap-1 text-[#6a9589] mr-1">
       <Icon name="radix-icons:clock" />
-      <span>{{ timerStore.timer.counter }}</span>
+      <span class="w-6">{{ timerStore.timer.counter }}</span>
     </div>
-    <div v-if="timerStore.timer.counter === timerStore.timer.init" class="flex">
+    <div class="flex">
       <Separator
         class="bg-secondary mx-2 data-[orientation=vertical]:h-6 data-[orientation=vertical]:w-1 rounded-3xl"
         decorative
