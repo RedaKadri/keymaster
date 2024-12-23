@@ -1,15 +1,19 @@
 <script setup lang="ts">
 const timerStore = useTimerStore();
 const timeOptions = [15, 30, 60, 120];
+
+const disableTimerOption = (timeOption: number) =>
+  timeOption === timerStore.timer.init ||
+  timerStore.timer.counter !== timerStore.timer.init;
 </script>
 
 <template>
   <div
-    class="flex items-center p-2 my-10 rounded-lg w-fit bg-accent text-accent-foreground"
+    class="flex items-center p-2 my-10 rounded-lg shadow-md w-fit bg-accent text-accent-foreground"
   >
     <div class="flex items-center gap-1 text-[#6a9589] mr-1">
       <Icon name="radix-icons:clock" />
-      <span class="w-6">{{ timerStore.timer.counter }}</span>
+      <span>{{ timerStore.timer.counter }}</span>
     </div>
     <div class="flex">
       <Separator
@@ -23,9 +27,9 @@ const timeOptions = [15, 30, 60, 120];
           :key="timeOption"
           class="mx-1 transition-colors hover:text-[#6a9589] overflow-clip"
           :class="{
-            'cursor-not-allowed': timeOption === timerStore.timer.init,
+            'cursor-not-allowed': disableTimerOption(timeOption),
           }"
-          :disabled="timeOption === timerStore.timer.init"
+          :disabled="disableTimerOption(timeOption)"
           @click="timerStore.setTimer(timeOption)"
         >
           {{ timeOption }}

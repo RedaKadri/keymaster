@@ -74,10 +74,10 @@ const resetTest = () => {
       @keypress="handleInputKeypress"
     />
     <MainTimer />
-    <div class="flex justify-center items-center" @click="blurSection = false">
+    <div class="flex items-center justify-center" @click="blurSection = false">
       <div
         v-if="blurSection"
-        class="absolute flex justify-center items-center gap-2"
+        class="absolute flex items-center justify-center gap-2"
       >
         <Icon name="radix-icons:cursor-arrow" />
         <p>Click here to focus</p>

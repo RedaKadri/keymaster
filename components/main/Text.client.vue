@@ -17,7 +17,7 @@ watch(
       updatedUserText.length > charsPer2Lines.value &&
       updatedUserText.endsWith(" ")
     ) {
-      currentScroll.value += 53;
+      currentScroll.value += 54;
       charsPer2Lines.value += textRef.value
         ? Math.floor(textRef.value?.clientWidth / 22)
         : 67;
