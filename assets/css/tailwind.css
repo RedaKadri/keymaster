@@ -6,6 +6,7 @@
   :root {
     --background: #f2ecbc;
     --foreground: #545464;
+    --foregroundShadow: #54546480;
 
     --popover: #f2ecbc;
     --popover-foreground: #545464;
@@ -34,6 +35,7 @@
   .dark {
     --background: #1f1f28;
     --foreground: #dcd7ba;
+    --foregroundShadow: #dcd7ba80;
 
     --popover: #1f1f28;
     --popover-foreground: #dcd7ba;

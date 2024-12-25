@@ -38,11 +38,12 @@ watch(
         :key="index"
         style=""
         :class="{
-          'opacity-100':
+          'text-foreground':
             index < userText.length && userText[index] === character,
+          'text-foregroundShadow': index >= userText.length,
           'text-destructive':
             index < userText.length && userText[index] !== character,
-          'opacity-50': index >= userText.length,
+          'border-b-4 border-b-[#76946a]': index === userText.length,
         }"
       >
         {{ character }}

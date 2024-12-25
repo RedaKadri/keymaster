@@ -7,6 +7,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        foregroundShadow: "var(--foregroundShadow)",
         popover: {
           DEFAULT: "var(--popover)",
           foreground: "var(--popover-foreground)",
