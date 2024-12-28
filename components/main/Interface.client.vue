@@ -3,7 +3,8 @@ import type { wpmType } from "~/types";
 
 const blurSection = ref(true);
 
-const text = ref(generateText(700));
+const language = ref<"french" | "english">("english");
+const text = ref(generateText(700, language.value));
 
 const timerStore = useTimerStore();
 
@@ -55,7 +56,7 @@ const resetTest = () => {
   timerStore.resetTimer();
   userStartTyping = false;
   wpm.value = [];
-  text.value = generateText(700);
+  text.value = generateText(700, language.value);
   blurSection.value = true;
 };
 </script>
@@ -67,13 +68,16 @@ const resetTest = () => {
     :reset-test="resetTest"
   />
   <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
+    <div class="flex justify-between items-center">
+      <MainTimer />
+      <div>lang:{{ language }}</div>
+    </div>
     <input
       ref="input"
       v-model="userInput"
       class="absolute z-50 opacity-0"
       @keypress="handleInputKeypress"
     />
-    <MainTimer />
     <div class="flex items-center justify-center" @click="blurSection = false">
       <div
         v-if="blurSection"

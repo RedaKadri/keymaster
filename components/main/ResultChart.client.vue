@@ -27,7 +27,7 @@ onMounted(() => {
           borderColor: "#2d4f67",
           pointBackgroundColor: "#2d4f67",
           borderWidth: 3,
-          pointRadius: 2,
+          pointRadius: 1.5,
           order: 2,
         },
         {
@@ -41,7 +41,7 @@ onMounted(() => {
           borderColor: "#727169",
           pointBackgroundColor: "#727169",
           borderWidth: 3,
-          pointRadius: 2,
+          pointRadius: 1.5,
           order: 3,
         },
         {
