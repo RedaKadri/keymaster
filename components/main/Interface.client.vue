@@ -3,7 +3,7 @@ import type { wpmType } from "~/types";
 
 const blurSection = ref(true);
 
-const language = ref<"french" | "english">("french");
+const language = ref<"french" | "english">("english");
 const toogleLanguage = () => {
   language.value = language.value === "french" ? "english" : "french";
 };
@@ -79,10 +79,11 @@ const resetTest = () => {
     :reset-test="resetTest"
   />
   <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
-    <div class="flex justify-between items-center">
-      <MainTimer />
+    <div class="mb-10">
+      <MainTimer class="relative md:top-10" />
       <button
-        class="flex justify-center items-center gap-2"
+        class="mx-auto flex justify-center p-2 items-center gap-2"
+        :disabled="timerStore.timer.counter !== timerStore.timer.init"
         @click="toogleLanguage"
       >
         <Icon name="solar:global-outline" />

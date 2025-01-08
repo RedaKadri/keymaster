@@ -9,7 +9,7 @@ const disableTimerOption = (timeOption: number) =>
 
 <template>
   <div
-    class="flex items-center p-2 my-10 rounded-lg shadow-md w-fit bg-accent text-accent-foreground"
+    class="flex items-center p-2 rounded-lg shadow-md w-fit bg-accent text-accent-foreground"
   >
     <div class="flex items-center gap-1 text-[#6a9589] mr-1">
       <Icon name="solar:alarm-outline" />
