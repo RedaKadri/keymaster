@@ -24,7 +24,7 @@ const result = wpm.at(-1);
       </p>
       <div>
         <Icon
-          name="radix-icons:double-arrow-right"
+          name="solar:double-alt-arrow-right-line-duotone"
           class="transition-colors cursor-pointer hover:text-primary-foreground"
           @click="resetTest"
         />

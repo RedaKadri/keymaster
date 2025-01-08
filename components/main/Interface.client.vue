@@ -3,8 +3,19 @@ import type { wpmType } from "~/types";
 
 const blurSection = ref(true);
 
-const language = ref<"french" | "english">("english");
-const text = ref(generateText(700, language.value));
+const language = ref<"french" | "english">("french");
+const toogleLanguage = () => {
+  language.value = language.value === "french" ? "english" : "french";
+};
+
+const text = ref("");
+watch(
+  language,
+  () => {
+    text.value = generateText(700, language.value);
+  },
+  { immediate: true },
+);
 
 const timerStore = useTimerStore();
 
@@ -70,7 +81,13 @@ const resetTest = () => {
   <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
     <div class="flex justify-between items-center">
       <MainTimer />
-      <div>lang:{{ language }}</div>
+      <button
+        class="flex justify-center items-center gap-2"
+        @click="toogleLanguage"
+      >
+        <Icon name="solar:global-outline" />
+        <span>{{ language }}</span>
+      </button>
     </div>
     <input
       ref="input"
@@ -83,7 +100,7 @@ const resetTest = () => {
         v-if="blurSection"
         class="absolute flex items-center justify-center gap-2"
       >
-        <Icon name="radix-icons:cursor-arrow" />
+        <Icon name="solar:cursor-bold" />
         <p>Click here to focus</p>
       </div>
       <MainText
@@ -94,7 +111,7 @@ const resetTest = () => {
     </div>
     <div class="flex justify-center m-10">
       <Icon
-        name="radix-icons:symbol"
+        name="solar:refresh-bold"
         class="absolute text-xl transition-all opacity-50 cursor-pointer hover:opacity-100 hover:rotate-90"
         @click="resetTest"
       />

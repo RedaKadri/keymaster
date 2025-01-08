@@ -131,7 +131,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="w-full h-60">
-    <canvas ref="canvas" />
-  </section>
+  <canvas ref="canvas" />
 </template>

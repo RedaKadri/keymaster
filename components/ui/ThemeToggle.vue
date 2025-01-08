@@ -9,11 +9,11 @@ const colorMode = useColorMode();
         class="w-10 h-10 border border-input bg-background hover:bg-accent text-accent-foreground"
       >
         <Icon
-          name="radix-icons:moon"
+          name="solar:moon-stars-outline"
           class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
         />
         <Icon
-          name="radix-icons:sun"
+          name="solar:sun-2-linear"
           class="absolute h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
         />
         <span class="sr-only">Toggle theme</span>
@@ -43,4 +43,3 @@ const colorMode = useColorMode();
     </DropdownMenuContent>
   </DropdownMenuRoot>
 </template>
-
