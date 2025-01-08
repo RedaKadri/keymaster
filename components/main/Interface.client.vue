@@ -4,7 +4,7 @@ import type { wpmType } from "~/types";
 const blurSection = ref(true);
 
 const language = ref<"french" | "english">("english");
-const toogleLanguage = () => {
+const toggleLanguage = () => {
   language.value = language.value === "french" ? "english" : "french";
 };
 
@@ -82,9 +82,9 @@ const resetTest = () => {
     <div class="mb-10">
       <MainTimer class="relative md:top-10" />
       <button
-        class="mx-auto flex justify-center p-2 items-center gap-2"
+        class="flex items-center justify-center gap-2 p-2 mx-auto"
         :disabled="timerStore.timer.counter !== timerStore.timer.init"
-        @click="toogleLanguage"
+        @click="toggleLanguage"
       >
         <Icon name="solar:global-outline" />
         <span>{{ language }}</span>
@@ -111,11 +111,12 @@ const resetTest = () => {
       />
     </div>
     <div class="flex justify-center m-10">
-      <Icon
-        name="solar:refresh-bold"
-        class="absolute text-xl transition-all opacity-50 cursor-pointer hover:opacity-100 hover:rotate-90"
-        @click="resetTest"
-      />
+      <button @click="resetTest">
+        <Icon
+          name="solar:refresh-bold"
+          class="absolute text-xl transition-all opacity-50 cursor-pointer hover:opacity-100 hover:rotate-90"
+        />
+      </button>
     </div>
   </section>
 </template>
