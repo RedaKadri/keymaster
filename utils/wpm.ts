@@ -4,10 +4,10 @@ export const wpmUtils = (
   wpm: wpmType[],
   userInputLength: number,
   timerInitValue: number,
-  timerCounter: number
+  timerCounter: number,
 ) => {
   const wpmRaw = Math.floor(
-    userInputLength / 5 / ((timerInitValue - timerCounter) / 60)
+    userInputLength / 5 / ((timerInitValue - timerCounter) / 60),
   );
 
   let allErrors = 0;
@@ -16,7 +16,7 @@ export const wpmUtils = (
   }
 
   const wpmNet = Math.floor(
-    (userInputLength / 5 - allErrors) / ((timerInitValue - timerCounter) / 60)
+    (userInputLength / 5 - allErrors) / ((timerInitValue - timerCounter) / 60),
   );
 
   return { wpmRaw, wpmNet: wpmNet < 0 ? 0 : wpmNet };
@@ -25,7 +25,7 @@ export const wpmUtils = (
 export const getWpmErrors = (
   prevUserInputIndex: number,
   userInput: string,
-  text: string
+  text: string,
 ) => {
   let wpmErrors = 0;
   for (let index = prevUserInputIndex; index < userInput.length; index++) {

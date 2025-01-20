@@ -43,7 +43,7 @@ watch(
           'text-foregroundShadow': index >= userText.length,
           'text-destructive':
             index < userText.length && userText[index] !== character,
-          'border-b-4 border-b-[#76946a]': index === userText.length,
+          'border-b-4 border-b-[#c0a36e]': index === userText.length,
         }"
       >
         {{ character }}

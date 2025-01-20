@@ -2,9 +2,7 @@
 import Chart from "chart.js/auto";
 import type { wpmType } from "~/types";
 
-const { wpm } = defineProps<{
-  wpm: wpmType[];
-}>();
+const { wpm } = defineProps<{ wpm: wpmType[] }>();
 
 const canvasRef = useTemplateRef("canvas");
 

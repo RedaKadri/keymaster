@@ -23,7 +23,7 @@ const errors = wpm.reduce((sum, item) => sum + item.errors, 0);
           <p class="text-7xl text-primary">{{ result?.x }}s</p>
         </div>
       </div>
-      <div class="h-56 w-full">
+      <div class="w-full h-56">
         <MainResultChart :wpm="wpm" />
         <div class="flex items-center justify-between mx-12 my-6">
           <div>
@@ -34,10 +34,10 @@ const errors = wpm.reduce((sum, item) => sum + item.errors, 0);
             <p class="opacity-75">errors</p>
             <p class="text-4xl text-destructive">{{ errors }}</p>
           </div>
-          <button class="text-4xl mt-3" @click="resetTest">
+          <button class="mt-3 text-4xl" @click="resetTest">
             <Icon
               name="solar:double-alt-arrow-right-line-duotone"
-              class="transition-colors hover:text-primary-foreground"
+              class="transition-colors hover:text-[#6a9589]"
             />
           </button>
         </div>
