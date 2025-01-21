@@ -1,4 +1,4 @@
-export function useLocalStorage<Type>(key: string) {
+export function localStorageUtil<Type>(key: string) {
   const setItem = (value: Type) => {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));

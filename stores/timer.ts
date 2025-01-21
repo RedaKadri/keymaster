@@ -1,5 +1,5 @@
 export const useTimerStore = defineStore("timer", () => {
-  const { getItem, setItem } = useLocalStorage<number>("time");
+  const { getItem, setItem } = localStorageUtil<number>("time");
 
   const timer = reactive<{ init: number; counter: number }>({
     init: getItem() || 15,
