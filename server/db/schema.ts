@@ -1,5 +1,6 @@
+import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { wpmType } from "~/types";
+import type { wpmType } from "~/types";
 
 export const users = sqliteTable("user", {
   id: text("id").primaryKey(),
@@ -14,9 +15,7 @@ export const sessions = sqliteTable("session", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
-  expiresAt: integer("expires_at", {
-    mode: "timestamp",
-  }).notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
 });
 
 export const games = sqliteTable("games", {
@@ -24,11 +23,12 @@ export const games = sqliteTable("games", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
-    status: text("status", {mode: "json"}).$type<Status>()
+  status: text("status", { mode: "json" }).$type<Status>(),
+  createdAt: integer("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
 
 type Status = {
-  language: "english"| "french",
-  time: number,
-  wpm: wpmType[]
-}
+  language: "english" | "french";
+  time: number;
+  wpm: wpmType[];
+};
