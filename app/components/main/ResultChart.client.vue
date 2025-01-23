@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import Chart from "chart.js/auto";
-import type { wpmType } from "~/types";
 
 const { wpm } = defineProps<{ wpm: wpmType[] }>();
 

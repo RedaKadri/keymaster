@@ -1,5 +1,3 @@
-import type { wpmType } from "~/types";
-
 export const wpmUtils = (
   wpm: wpmType[],
   userInputLength: number,

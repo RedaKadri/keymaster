@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { wpmType } from "~/types";
-
 const blurSection = ref(true);
 
 const language = ref<"french" | "english">("english");

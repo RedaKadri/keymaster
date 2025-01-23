@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { wpmType } from "~/types";
-
 const { wpm, resetTest } = defineProps<{
   wpm: wpmType[];
   resetTest: () => void;

@@ -1,6 +1,5 @@
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import type { wpmType } from "~/types";
 
 export const users = sqliteTable("user", {
   id: text("id").primaryKey(),
