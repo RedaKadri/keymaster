@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: "keymaster",
+  title: "Keymaster",
 });
 </script>
 
