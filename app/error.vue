@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import type { NuxtError } from '#app'
+import type { NuxtError } from "#app";
 
-const props = defineProps({
-  error: Object as () => NuxtError
-})
+const props = defineProps({ error: Object as () => NuxtError });
 
-useHead({
-  title: `${props.error?.statusCode} | Keymaster`
-})
+useHead({ title: `${props.error?.statusCode} | Keymaster` });
 </script>
 
 <template>
   <main class="flex items-center justify-center w-screen h-screen gap-8">
     <section>
-      <img src="/../public/elmo-idk.gif" class="rounded-md">
+      <img src="/../public/elmo-idk.gif" class="rounded-md" />
     </section>
     <section class="flex flex-col items-center justify-center gap-4">
       <h1 class="text-8xl text-primary">{{ props.error?.statusCode }}</h1>
