@@ -1,28 +1,34 @@
 import { setSessionTokenCookie } from "../lib/cookies";
-import { validateSessionToken } from "../lib/session";
+import {
+  type SessionValidationResult,
+  validateSessionToken,
+} from "../lib/session";
+
+declare module "h3" {
+  interface H3EventContext {
+    auth: SessionValidationResult;
+  }
+}
 
 export default defineEventHandler(async (event) => {
   if (!getRequestURL(event).pathname.startsWith("/api")) return;
 
   const token = getCookie(event, "session");
   if (!token) {
+    event.context.auth = { user: null, session: null };
     throw createError({
       status: 401,
       statusMessage: "Unauthorized",
     });
   }
 
-  const { user, session } = await validateSessionToken(token);
+  const authData = await validateSessionToken(token);
 
-  if (!session) {
+  if (!authData.session) {
     deleteCookie(event, "session");
-    throw createError({
-      status: 401,
-      statusMessage: "Unauthorized",
-    });
   } else {
-    setSessionTokenCookie(event, token, session.expiresAt);
+    setSessionTokenCookie(event, token, authData.session.expiresAt);
   }
 
-  event.context.auth = { user, session };
+  event.context.auth = authData;
 });

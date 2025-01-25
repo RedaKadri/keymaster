@@ -59,7 +59,6 @@ export async function invalidateSession(sessionId: string) {
   await db.delete(tables.sessions).where(eq(tables.sessions.id, sessionId));
 }
 
-
 export type SessionValidationResult =
-  | { session: Session; user: User }
-  | { session: null; user: null };
+  | { user: User; session: Session }
+  | { user: null; session: null };
