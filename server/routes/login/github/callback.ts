@@ -35,12 +35,11 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const githubUserResponse = await fetch("https://api.github.com/user", {
+  const githubUser = await $fetch<GitHubUser>("https://api.github.com/user", {
     headers: {
       Authorization: `Bearer ${tokens.accessToken()}`,
     },
   });
-  const githubUser: GitHubUser = await githubUserResponse.json();
 
   const [existingUser] = await db
     .select()
