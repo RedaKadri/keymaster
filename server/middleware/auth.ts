@@ -16,10 +16,7 @@ export default defineEventHandler(async (event) => {
   const token = getCookie(event, "session");
   if (!token) {
     event.context.auth = { user: null, session: null };
-    throw createError({
-      status: 401,
-      statusMessage: "Unauthorized",
-    });
+    return;
   }
 
   const authData = await validateSessionToken(token);
