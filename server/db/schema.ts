@@ -5,8 +5,9 @@ export const users = sqliteTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull().unique(),
   email: text("email").unique(),
-  authProvider: text("auth_provider", { enum: ["google", "github"] }).notNull(),
   avatarUrl: text("avatar_url"),
+  authProvider: text("auth_provider", { enum: ["google", "github"] }).notNull(),
+  authProviderID: text("auth_provider_id").notNull(),
 });
 
 export const sessions = sqliteTable("session", {
