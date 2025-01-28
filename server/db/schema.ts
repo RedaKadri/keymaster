@@ -8,6 +8,7 @@ export const users = sqliteTable("user", {
   avatarUrl: text("avatar_url"),
   authProvider: text("auth_provider", { enum: ["google", "github"] }).notNull(),
   authProviderID: text("auth_provider_id").notNull(),
+  createdAt: integer("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
 
 export const sessions = sqliteTable("session", {

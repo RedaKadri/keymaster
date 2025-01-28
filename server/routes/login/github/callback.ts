@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
     const sessionToken = generateSessionToken();
     const session = await createSession(sessionToken, existingUser.id);
     setSessionTokenCookie(event, sessionToken, session.expiresAt);
-    return sendRedirect(event, "/");
+    return sendRedirect(event, "/account");
   }
 
   const userId = createId();
@@ -65,5 +65,5 @@ export default defineEventHandler(async (event) => {
   const sessionToken = generateSessionToken();
   const session = await createSession(sessionToken, userId);
   setSessionTokenCookie(event, sessionToken, session.expiresAt);
-  return sendRedirect(event, "/");
+  return sendRedirect(event, "/account");
 });
