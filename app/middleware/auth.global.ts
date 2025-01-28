@@ -1,9 +1,12 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  if (["login", "index"].includes(String(to.name))) return;
-
   const user = useUser();
   const data = await useRequestFetch()("/api/user");
 
-  if (!data) return navigateTo("/login", { redirectCode: 301 });
-  user.value = data;
+  if (data) {
+    user.value = data;
+    if (to.name === "login") return navigateTo("/");
+    return;
+  }
+
+  if (to.name === "account") return navigateTo("/login");
 });

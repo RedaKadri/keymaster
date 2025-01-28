@@ -25,4 +25,7 @@ export default defineNuxtConfig({
     classPrefix: "",
     classSuffix: "",
   },
+  routeRules: {
+    "/": { ssr: false },
+  },
 });
