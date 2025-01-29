@@ -1,7 +1,3 @@
-<script setup lang="ts">
-const user = useUser();
-</script>
-
 <template>
   <header
     class="sticky top-0 z-50 flex items-center justify-between bg-background/95 py-8 backdrop-blur supports-[backdrop-filter]:bg-background/60"
@@ -17,12 +13,7 @@ const user = useUser();
       </NuxtLink>
     </div>
     <div className="flex justify-center items-center gap-6">
-      <UiAvatar
-        v-if="user"
-        :user-avatar-url="user?.avatarUrl || ''"
-        :user-name="user?.name"
-      />
-      <UiThemeToggle />
+      <UiUserMenu />
     </div>
   </header>
 </template>
