@@ -3,7 +3,7 @@ import type { NuxtError } from "#app";
 
 const props = defineProps({ error: Object as () => NuxtError });
 
-useHead({ title: `${props.error?.statusCode} | Keymaster` });
+useHead({ title: `${props.error?.statusCode} - Keymaster` });
 </script>
 
 <template>
@@ -15,7 +15,9 @@ useHead({ title: `${props.error?.statusCode} | Keymaster` });
       <h1 class="text-8xl text-primary">{{ props.error?.statusCode }}</h1>
       <p class="text-xl">{{ props.error?.message }}</p>
       <NuxtLink to="/">
-        <UiButton class="gap-2 text-md bg-secondary text-secondary-foreground hover:bg-secondary/80">
+        <UiButton
+          class="gap-2 text-md bg-secondary text-secondary-foreground hover:bg-secondary/80"
+        >
           <Icon name="solar:home-linear" />
           Go back home
         </UiButton>

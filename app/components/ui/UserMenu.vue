@@ -2,6 +2,13 @@
 const user = useUser();
 
 const colorMode = useColorMode();
+
+const logout = async () => {
+  await $fetch("/api/logout", {
+    method: "POST",
+  });
+  navigateTo("/");
+};
 </script>
 
 <template>
@@ -97,10 +104,12 @@ const colorMode = useColorMode();
             <Icon name="solar:login-2-bold" class="w-4 h-4 mr-2" />
             <span> Log in </span>
           </NuxtLink>
-          <NuxtLink v-else to="account" class="flex items-center">
-            <Icon name="solar:logout-2-bold" class="w-4 h-4 mr-2" />
-            <span> Log out </span>
-          </NuxtLink>
+          <form v-else @submit.prevent="logout">
+            <button type="submit" class="flex items-center">
+              <Icon name="solar:logout-2-bold" class="w-4 h-4 mr-2" />
+              <span> Log out </span>
+            </button>
+          </form>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenuPortal>

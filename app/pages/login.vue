@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useHead({ title: "login | Keymaster" });
+useHead({ title: "login - Keymaster" });
 
 const url = useRequestURL();
 </script>
