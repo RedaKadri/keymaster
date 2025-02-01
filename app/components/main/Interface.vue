@@ -74,6 +74,7 @@ const resetTest = () => {
   <MainResult
     v-if="timerStore.timer.counter === 0"
     :wpm="wpm"
+    :language="language"
     :reset-test="resetTest"
   />
   <section v-else class="w-full cursor-default" @click="inputRef?.focus()">
@@ -93,7 +94,7 @@ const resetTest = () => {
       v-model="userInput"
       class="absolute z-50 opacity-0"
       @keypress="handleInputKeypress"
-    >
+    />
     <div class="flex items-center justify-center" @click="blurSection = false">
       <div
         v-if="blurSection"

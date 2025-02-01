@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import type { Status } from "../types";
 
 export const users = sqliteTable("user", {
   id: text("id").primaryKey(),
@@ -27,9 +28,3 @@ export const games = sqliteTable("games", {
   status: text("status", { mode: "json" }).$type<Status>(),
   createdAt: integer("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
-
-type Status = {
-  language: "english" | "french";
-  time: number;
-  wpm: wpmType[];
-};

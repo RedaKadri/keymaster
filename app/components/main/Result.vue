@@ -1,11 +1,30 @@
 <script setup lang="ts">
-const { wpm, resetTest } = defineProps<{
+const { wpm, language, resetTest } = defineProps<{
   wpm: wpmType[];
+  language: "french" | "english";
   resetTest: () => void;
 }>();
 
 const result = wpm.at(-1);
 const errors = wpm.reduce((sum, item) => sum + item.errors, 0);
+
+const user = useUser();
+
+onMounted(async () => {
+  if (!user.value) return;
+
+  await $fetch("/api/games", {
+    method: "POST",
+    body: {
+      time: result?.x,
+      language,
+      wpm,
+    },
+    async onResponse({ response }) {
+      console.log(response.status, response.statusText, response._data.message);
+    },
+  });
+});
 </script>
 
 <template>
@@ -25,6 +44,10 @@ const errors = wpm.reduce((sum, item) => sum + item.errors, 0);
         <MainResultChart :wpm="wpm" />
         <div class="flex items-center justify-between mx-12 my-6">
           <div>
+            <p class="opacity-75">language</p>
+            <p class="text-4xl text-primary">{{ language }}</p>
+          </div>
+          <div>
             <p class="opacity-75">raw</p>
             <p class="text-4xl text-primary">{{ result?.raw }}</p>
           </div>
@@ -38,6 +61,16 @@ const errors = wpm.reduce((sum, item) => sum + item.errors, 0);
               class="transition-colors hover:text-[#6a9589]"
             />
           </button>
+        </div>
+        <div v-if="!user" class="my-6">
+          <p class="text-center">
+            <NuxtLink
+              to="login"
+              class="underline-offset-4 underline hover:text-secondary-foreground transition-colors"
+              >Sign in</NuxtLink
+            >
+            to save your result
+          </p>
         </div>
       </div>
     </div>
