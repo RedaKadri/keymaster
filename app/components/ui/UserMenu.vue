@@ -21,21 +21,11 @@ const logout = async () => {
         <Icon name="solar:menu-dots-bold" class="w-full h-full" />
       </button>
       <button v-else>
-        <AvatarRoot
-          class="flex overflow-hidden rounded-full cursor-pointer h-9 w-9 shrink-0"
-        >
-          <AvatarImage
-            class="flex items-center justify-center w-full h-full rounded-full bg-muted"
-            :src="user?.avatarUrl || ''"
-            :alt="user?.name"
-          />
-          <AvatarFallback
-            class="flex items-center justify-center w-full h-full rounded-full bg-muted"
-            :delay-ms="600"
-          >
-            {{ user?.name.charAt(0) }}
-          </AvatarFallback>
-        </AvatarRoot>
+        <UiAvatar
+          :user-name="user.name"
+          :avatar-url="user.avatarUrl"
+          class="h-9 w-9"
+        />
       </button>
     </DropdownMenuTrigger>
     <DropdownMenuPortal>

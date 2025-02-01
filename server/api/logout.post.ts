@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
       statusCode: 403,
     });
   }
-  console.log(session);
 
   await invalidateSession(session.id);
   deleteCookie(event, "session");
