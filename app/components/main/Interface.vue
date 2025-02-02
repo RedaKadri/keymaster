@@ -25,7 +25,7 @@ const handleInputKeypress = () => {
   userStartTyping = true;
 };
 
-const wpm = ref<wpmType[]>([]);
+const wpm = shallowRef<wpmType[]>([]);
 
 let prevUserInputIndex = 0;
 watch(
@@ -68,11 +68,15 @@ const resetTest = () => {
   text.value = generateText(700, language.value);
   blurSection.value = true;
 };
+
+onMounted(() => {
+  resetTest();
+});
 </script>
 
 <template>
   <MainResult
-    v-if="timerStore.timer.counter === 0"
+    v-if="timerStore.timer.counter === 0 && wpm.length !== 0"
     :wpm="wpm"
     :language="language"
     :reset-test="resetTest"
