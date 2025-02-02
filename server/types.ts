@@ -1,7 +1,10 @@
-export type Status = {
+export type Stats = {
   language: "english" | "french";
   time: number;
-  wpm: wpmType[];
+  errors: number;
+  wpm: number;
+  raw: number;
+  timeLine: wpmType[];
 };
 
 export type GitHubUser = {

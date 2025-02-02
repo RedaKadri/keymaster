@@ -1,15 +1,15 @@
-import type { Status } from "~~/server/types";
+import type { Stats } from "~~/server/types";
 
 export default defineEventHandler(async (event) => {
   const { user } = event.context.auth;
   if (!user) throw createError({ status: 401 });
 
-  const body: Status = await readBody(event);
+  const body: Stats = await readBody(event);
 
   try {
     await db.insert(tables.games).values({
       userId: user.id,
-      status: body,
+      stats: body,
     });
     return sendNoContent(event, 201);
   } catch (error) {

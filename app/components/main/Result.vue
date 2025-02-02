@@ -20,7 +20,10 @@ onMounted(async () => {
     body: {
       time: result?.x,
       language,
-      wpm,
+      wpm: result?.net,
+      raw: result?.raw,
+      errors,
+      timeline: wpm,
     },
     async onResponse({ response }) {
       if (response.ok) {

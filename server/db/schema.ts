@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import type { Status } from "../types";
+import type { Stats } from "../types";
 
 export const users = sqliteTable("user", {
   id: text("id").primaryKey(),
@@ -25,6 +25,6 @@ export const games = sqliteTable("games", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
-  status: text("status", { mode: "json" }).$type<Status>(),
+  stats: text("status", { mode: "json" }).$type<Stats>(),
   createdAt: integer("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
