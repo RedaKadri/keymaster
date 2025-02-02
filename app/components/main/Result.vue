@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { toast } from "vue-sonner";
+
 const { wpm, language, resetTest } = defineProps<{
   wpm: wpmType[];
   language: "french" | "english";
@@ -21,7 +23,16 @@ onMounted(async () => {
       wpm,
     },
     async onResponse({ response }) {
-      console.log(response.status, response.statusText, response._data.message);
+      if (response.ok) {
+        toast.success("Games has been saved successfully", {
+          style: { background: "#76946a", border: "#98bb6c" },
+        });
+      } else {
+        toast.error(response._data.message, {
+          description: response.statusText,
+          style: { background: "#c34043", border: "#e82424" },
+        });
+      }
     },
   });
 });
@@ -67,8 +78,9 @@ onMounted(async () => {
             <NuxtLink
               to="login"
               class="underline-offset-4 underline hover:text-secondary-foreground transition-colors"
-              >Sign in</NuxtLink
             >
+              Sign in
+            </NuxtLink>
             to save your result
           </p>
         </div>
