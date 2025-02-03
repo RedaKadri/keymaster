@@ -25,6 +25,6 @@ export const games = sqliteTable("games", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id),
-  stats: text("status", { mode: "json" }).$type<Stats>(),
+  stats: text("status", { mode: "json" }).$type<Stats>().notNull(),
   createdAt: integer("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });

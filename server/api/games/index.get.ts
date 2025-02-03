@@ -2,12 +2,19 @@ import { eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   const { user } = event.context.auth;
-  if (!user) throw createError({ status: 401 });
+  if (!user) {
+    throw createError({ status: 401, message: "Unauthorized" });
+  }
 
-  const result = await db
-    .select()
-    .from(tables.games)
-    .where(eq(tables.games.userId, user.id));
+  try {
+    const games = await db
+      .select()
+      .from(tables.games)
+      .where(eq(tables.games.userId, user.id));
 
-  return result;
+    return games;
+  } catch (error) {
+    console.error("Error fetching games:", error);
+    throw createError({ status: 500, message: "Failed to fetch games." });
+  }
 });

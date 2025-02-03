@@ -25,8 +25,8 @@ export default defineNuxtConfig({
     classPrefix: "",
     classSuffix: "",
   },
+  ssr: false,
   routeRules: {
-    "/": { ssr: false },
     "/api/**": { cors: true },
   },
 });
