@@ -5,5 +5,7 @@ useHead({
 </script>
 
 <template>
-  <MainInterface />
+  <main class="flex justify-center items-center h-2/3">
+    <MainInterface />
+  </main>
 </template>

@@ -5,7 +5,7 @@ const url = useRequestURL();
 </script>
 
 <template>
-  <div class="flex items-center justify-center gap-36">
+  <main class="flex justify-center items-center gap-44 h-3/4">
     <section>
       <h1
         class="text-4xl font-extrabold tracking-tight scroll-m-20 lg:text-5xl"
@@ -39,5 +39,5 @@ const url = useRequestURL();
         Google
       </NuxtLink>
     </section>
-  </div>
+  </main>
 </template>
