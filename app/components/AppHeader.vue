@@ -12,7 +12,7 @@
         </UiButton>
       </NuxtLink>
     </div>
-    <div class="flex justify-center items-center gap-6">
+    <div class="flex items-center justify-center gap-6">
       <UiUserMenu />
     </div>
   </header>

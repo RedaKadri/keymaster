@@ -80,7 +80,7 @@ onMounted(async () => {
           <p class="text-center">
             <NuxtLink
               to="login"
-              class="underline-offset-4 underline hover:text-secondary-foreground transition-colors"
+              class="underline transition-colors underline-offset-4 hover:text-secondary-foreground"
             >
               Sign in
             </NuxtLink>

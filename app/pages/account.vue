@@ -41,14 +41,14 @@ watch(status, () => {
 <template>
   <main
     v-if="status === 'pending'"
-    class="flex justify-center items-center h-2/3"
+    class="flex items-center justify-center h-2/3"
   >
     <IconsSpinner />
   </main>
 
-  <main v-else class="w-full flex flex-col gap-12">
+  <main v-else class="flex flex-col w-full gap-12">
     <section
-      class="w-full p-8 flex items-center transition-all justify-between rounded-md shadow-md bg-secondary text-secondary-foreground"
+      class="flex items-center justify-between w-full p-8 transition-all rounded-md shadow-md bg-secondary text-secondary-foreground"
     >
       <div class="flex items-center gap-4">
         <div>
@@ -93,7 +93,7 @@ watch(status, () => {
         class="w-[48%] p-8 overflow-hidden flex relative group items-center transition-all justify-between rounded-md shadow-md bg-secondary text-secondary-foreground"
       >
         <div
-          class="p-1 rounded-tr-md opacity-0 group-hover:opacity-100 transition-all absolute bottom-0 left-0 bg-accent text-accent-foreground"
+          class="absolute bottom-0 left-0 p-1 transition-all opacity-0 rounded-tr-md group-hover:opacity-100 bg-accent text-accent-foreground"
         >
           english
         </div>
@@ -111,7 +111,7 @@ watch(status, () => {
         class="w-[48%] p-8 overflow-hidden flex relative group items-center transition-all justify-between rounded-md shadow-md bg-secondary text-secondary-foreground"
       >
         <div
-          class="p-1 rounded-tr-md opacity-0 group-hover:opacity-100 transition-all absolute bottom-0 left-0 bg-accent text-accent-foreground"
+          class="absolute bottom-0 left-0 p-1 transition-all opacity-0 rounded-tr-md group-hover:opacity-100 bg-accent text-accent-foreground"
         >
           french
         </div>
