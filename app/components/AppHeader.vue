@@ -5,7 +5,7 @@
     <div>
       <NuxtLink to="/">
         <UiButton
-          class="gap-2 px-0 text-4xl font-bold bg-background text-foreground hover:bg-transparent hover:text-secondary-foreground"
+          class="gap-2 px-0 text-4xl font-bold bg-transparent text-foreground hover:bg-transparent hover:text-secondary-foreground"
         >
           <Icon name="solar:keyboard-broken" class="h-[2.4rem] w-[2.4rem]" />
           keymaster

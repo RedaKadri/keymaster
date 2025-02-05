@@ -27,8 +27,8 @@ watch(status, () => {
   }
 
   if (!data.value || data.value.length === 0) {
-    toast.info("No games found", {
-      description: "Start playing today!",
+    toast.info("No test found", {
+      description: "Start playing now!",
       style: { background: "#7e9cd8", border: "#7fb4ca" },
     });
     return navigateTo("/");
@@ -40,7 +40,7 @@ watch(status, () => {
 
 <template>
   <main
-    v-if="status === 'pending'"
+    v-if="status === 'pending' || data?.length === 0"
     class="flex items-center justify-center h-2/3"
   >
     <IconsSpinner />
@@ -124,6 +124,12 @@ watch(status, () => {
           <p class="text-3xl font-semibold">{{ frenchwpm.wpm || "-" }}</p>
         </div>
       </div>
+    </section>
+
+    <section
+      class="flex items-center justify-between w-full p-8 transition-all rounded-md shadow-md bg-secondary text-secondary-foreground"
+    >
+      <MainTable v-if="data" :data="data" />
     </section>
   </main>
 </template>

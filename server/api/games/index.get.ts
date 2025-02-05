@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 export default defineEventHandler(async (event) => {
   const { user } = event.context.auth;
@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
     const games = await db
       .select()
       .from(tables.games)
+      .orderBy(desc(tables.games.createdAt))
       .where(eq(tables.games.userId, user.id));
 
     return games;

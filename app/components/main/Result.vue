@@ -23,7 +23,7 @@ onMounted(async () => {
       wpm: result?.net,
       raw: result?.raw,
       errors,
-      timeline: wpm,
+      timeLine: wpm,
     },
     async onResponse({ response }) {
       if (response.ok) {
