@@ -1,75 +1,29 @@
-# Nuxt Minimal Starter
+<div align="center">
+  <img width="80%" src="https://raw.githubusercontent.com/RedaKadri/keymaster/repo/logo.png" />
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+  &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
+  &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
+</div>
 
-## Setup
+## Screenshots
 
-Make sure to install dependencies:
+<p align="center">
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/RedaKadri/keymaster/repo/SC1.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/RedaKadri/keymaster/repo/SC2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/RedaKadri/keymaster/repo/SC3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/RedaKadri/keymaster/repo/SC4.png" />
+</p>
 
-```bash
-# npm
-npm install
+<br>
 
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Installation
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
+cp .env.example .env
+pnpm i
+pnpm db:push
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+<br>
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
