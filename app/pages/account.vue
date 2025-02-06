@@ -95,7 +95,7 @@ watch(status, () => {
         <div
           class="absolute bottom-0 left-0 p-1 transition-all opacity-0 rounded-tr-md group-hover:opacity-100 bg-accent text-accent-foreground"
         >
-          english
+          english<span class="text-sm">(best)</span>
         </div>
         <div
           v-for="(englishwpm, index) in stats.highestWpm.english"
@@ -113,7 +113,7 @@ watch(status, () => {
         <div
           class="absolute bottom-0 left-0 p-1 transition-all opacity-0 rounded-tr-md group-hover:opacity-100 bg-accent text-accent-foreground"
         >
-          french
+          french<span class="text-sm">(best)</span>
         </div>
         <div
           v-for="(frenchwpm, index) in stats.highestWpm.french"
