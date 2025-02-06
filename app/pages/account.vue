@@ -36,6 +36,13 @@ watch(status, () => {
 
   stats = getWpmUserStats(data.value);
 });
+
+const deleteUser = async () => {
+  await $fetch("/api/user", {
+    method: "DELETE",
+  });
+  reloadNuxtApp({ path: "/" });
+};
 </script>
 
 <template>
@@ -48,8 +55,50 @@ watch(status, () => {
 
   <main v-else class="flex flex-col w-full gap-12">
     <section
-      class="flex items-center justify-between w-full p-8 transition-all rounded-md shadow-md bg-secondary text-secondary-foreground"
+      class="flex items-center justify-between w-full p-8 mt-5 transition-all rounded-md relative group shadow-md bg-secondary text-secondary-foreground"
     >
+      <DialogRoot>
+        <DialogTrigger
+          class="absolute top-[-15px] right-[-15px] w-10 h-10 flex justify-center items-center transition-all opacity-0 rounded-full group-hover:opacity-100 hover:bg-[#e82424] hover:text-primary bg-[#c34043] text-accent-foreground"
+        >
+          <Icon name="solar:trash-bin-minimalistic-broken" size="20" />
+        </DialogTrigger>
+        <DialogPortal>
+          <DialogOverlay
+            class="fixed inset-0 z-50 bg-black/40 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+          />
+          <DialogContent
+            class="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed top-[50%] left-[50%] max-h-[85vh] w-lvw max-w-[500px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-secondary p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
+          >
+            <div class="flex flex-col gap-10">
+              <div class="w-full flex flex-col gap-4">
+                <DialogTitle
+                  class="text-xl font-semibold leading-none tracking-tight"
+                  >Confirm deletion the account</DialogTitle
+                >
+                <DialogDescription class="text-sm text-muted-foreground">
+                  This action is irreversible and will permanently delete the
+                  account.
+                </DialogDescription>
+              </div>
+              <div
+                class="flex flex-col-reverse sm:flex-row sm:justify-end gap-4"
+              >
+                <UiButton
+                  class="border border-accent bg-transparent hover:bg-accent hover:text-accent-foreground"
+                >
+                  Cancel
+                </UiButton>
+                <UiButton
+                  class="bg-[#c34043] text-secondary hover:bg-[#c34043]/90"
+                  @click="deleteUser"
+                  >Delete</UiButton
+                >
+              </div>
+            </div>
+          </DialogContent>
+        </DialogPortal>
+      </DialogRoot>
       <div class="flex items-center gap-4">
         <div>
           <UiAvatar
