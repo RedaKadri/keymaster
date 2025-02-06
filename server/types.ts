@@ -13,3 +13,10 @@ export type GitHubUser = {
   avatar_url: string;
   email?: string;
 };
+
+export type GoogleType = {
+  sub: string;
+  email: string;
+  name: string;
+  picture?: string;
+};

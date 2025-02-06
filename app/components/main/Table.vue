@@ -11,8 +11,6 @@ const loadMoreData = () => {
     paginatedData.value.length + 4,
   );
   paginatedData.value.push(...nextData);
-
-  console.log(paginatedData.value);
 };
 </script>
 <template>
